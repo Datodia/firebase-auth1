@@ -8,9 +8,9 @@ import { useEffect } from "react";
 export default function HomePage() {
   const router = useRouter();
   const [user] = useAuthState(auth);
-  const userSession = sessionStorage.getItem("user");
-
+  
   useEffect(() => {
+    const userSession = sessionStorage.getItem("user");
     if (!user && !userSession) {
       router.push("/sign-up");
     }
