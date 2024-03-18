@@ -15,10 +15,12 @@ export default function SignUp() {
     try {
       e.preventDefault();
       const res = await signInWithEmailAndPassword(email, password);
-      sessionStorage.setItem("user", "exist");
+      if(res?.user){
+        sessionStorage.setItem("user", "exist");
+        router.push("/");
+      }
       setEmail("");
       setPassword("");
-      router.push("/");
     } catch (er) {
       console.log(er);
     }

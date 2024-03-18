@@ -17,10 +17,11 @@ export default function SignUp() {
     try {
       e.preventDefault();
       const res = await createUserWithEmailAndPassword(email, password);
-      console.log(res, "response");
-      setEmail("");
+      if(res?.user){
+        router.push("/sign-in");
+      }
       setPassword("");
-      router.push("/sign-in");
+      setEmail("");
     } catch (er) {
       console.log(er);
     }

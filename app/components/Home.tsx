@@ -17,7 +17,7 @@ export default function HomePage() {
     }
   }, [user]);
 
-  if(!userSession){
+  if(!userSession && !user){
     return null
   }
   return (
