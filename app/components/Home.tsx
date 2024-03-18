@@ -3,19 +3,23 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/config";
 import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
-import { useEffect } from "react";
+import {  useLayoutEffect } from "react";
 
 export default function HomePage() {
   const router = useRouter();
   const [user] = useAuthState(auth);
+  let userSession = null
   
-  useEffect(() => {
-    const userSession = sessionStorage.getItem("user");
+  useLayoutEffect(() => {
+    userSession = sessionStorage.getItem("user");
     if (!user && !userSession) {
       router.push("/sign-up");
     }
   }, [user]);
 
+  if(!userSession){
+    return null
+  }
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
       <button
